@@ -25,6 +25,7 @@
         character   argv*300,minute*2,M11*2,mins(nz)*2
         character*12 ilev,xy,xm,xd,xh,xmin,M5,M6,M7,M8
         character*12 M10,M0,M1,M2,min,M3,M4,xn1,xn2,xn3,xn4,M9
+        real wlon,elon,slat,nlat
 
         CHARACTER       cbfmsg*(MXBF),
      +                  csubset*8, inf*200, outstg*200
@@ -54,13 +55,14 @@ c*
           date_tag=argv
           IF (n .eq. 6) THEN  ! User-specified lat/lon boundaries
             call getarg(3,argv)
-            wlon = argv
+            read(argv,*) wlon
             call getarg(4,argv)
-            elon = argv
+            read(argv,*) elon
             call getarg(5,argv)
-            slat = argv
+            read(argv,*) slat
             call getarg(6,argv)
-            nlat = argv
+            read(argv,*) nlat
+            write(*,*) 'wlon elon slat nlat'
           ELSE  ! Default lon/lat boundaries
             slat = -90.
             nlat = 90.
