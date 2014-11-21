@@ -103,12 +103,6 @@ C*      Open output file
         nlev = 1
         dumm=99999.9
 
-! Select desired area
-        slat = -90.
-        nlat = 90.
-        wlon = -180.
-        elon = 180.
-
         isurf = 1
         ibogus = 0
         do k=1,nz
