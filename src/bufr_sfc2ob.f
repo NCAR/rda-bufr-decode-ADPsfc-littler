@@ -62,7 +62,7 @@ c*
             read(argv,*) slat
             call getarg(6,argv)
             read(argv,*) nlat
-            write(*,*) 'wlon elon slat nlat'
+            write(*,*) wlon,elon,slat,nlat
           ELSE  ! Default lon/lat boundaries
             slat = -90.
             nlat = 90.
