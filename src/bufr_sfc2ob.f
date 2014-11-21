@@ -62,7 +62,7 @@ c*
             read(argv,*) slat
             call getarg(6,argv)
             read(argv,*) nlat
-            write(*,*) wlon,elon,slat,nlat
+            write(*,*) 'Lon/lat boundaries: ',wlon,elon,slat,nlat
           ELSE  ! Default lon/lat boundaries
             slat = -90.
             nlat = 90.
@@ -138,7 +138,7 @@ C*          Read the next BUFR message.
            call readns(11,csubset,idate,ierr)
 C           code = IUPBS1(MBAY,33) 
 C            write(*,*)' idate: ',idate,'  ',csubset,' ',code
-            write(*,*)' idate: ',idate,'  ',csubset
+c            write(*,*)' idate: ',idate,'  ',csubset
             IF  ( ierr .eq.  -1 )  THEN
                 write(*,*) '....all records read, Exit'
                 CALL CLOSBF  ( 11 )
