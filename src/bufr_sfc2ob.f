@@ -43,15 +43,40 @@
         ostr(4)='TMDB TMDP REHU TP03 TP24'
         ostr(5)='HOCB CLTP'
 
+C*-----------------------------------------------------------------------
+c*    Read the command-line arguments
+c*      
         n = iargc()
+        IF (n .GE. 2) THEN
+          call getarg( 1, argv )
+          inf=argv
+          call getarg(2,argv)
+          date_tag=argv
+          IF (n .eq. 6) THEN  ! User-specified lat/lon boundaries
+            call getarg(3,argv)
+            wlon = argv
+            call getarg(4,argv)
+            elon = argv
+            call getarg(5,argv)
+            slat = argv
+            call getarg(6,argv)
+            nlat = argv
+          ELSE  ! Default lon/lat boundaries
+            slat = -90.
+            nlat = 90.
+            wlon = -180.
+            elon = 180.
+          END IF
+        ELSE
+          write(*,*) 'Usage: bufr_sfc2ob.x gdas.adpsfc.t<HH>z.
+     +<YYYYMMDD>.bufr.be <YYYYMMDDHH> west_lon east_lon 
+     +south_lat north_lat'
+          STOP
+        END IF
+
 C*-----------------------------------------------------------------------
 
 C*      Open the BUFR messages file.
-
-        call getarg( 1, argv )
-        inf=argv
-        call getarg(2,argv)
-        date_tag=argv
 
 c*        write(*,*) 'enter input BUFR file?'
 c*        read(*,'(a)') inf 
@@ -73,12 +98,6 @@ C*      Open output file
         iflag = 0
         nlev = 1
         dumm=99999.9
-
-! Select desired area
-        slat = -90.
-        nlat = 90.
-        wlon = -180.
-        elon = 180.
 
         isurf = 1
         ibogus = 0
