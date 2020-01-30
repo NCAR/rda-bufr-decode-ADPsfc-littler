@@ -26,9 +26,9 @@ and edit and run the exe/convert.csh script accordingly. **
 References:
 ================================================================================
 
-A guide to the BUFR libraries can be found at:
+The latest release of the BUFR software library is required to compile and use
+this code.  Software download and user guide to the BUFR libraries can be found at:
 https://www.emc.ncep.noaa.gov/index.php?branch=BUFRLIB
 
-Definitions for BUFR MNEMONIC headers can be found in the doc directory
-or at:
+Definitions for BUFR MNEMONIC headers can be found at:
 https://www.emc.ncep.noaa.gov/BUFRLIB/tables/bufrtab_tableb.html	
