@@ -1,4 +1,3 @@
-Last updated 14 October 2013
 ds461.0 (NCEP ADP Global Surface Observations, daily Oct1999-continuing)
 
 Description and instructions to use the included extraction program:
@@ -8,8 +7,7 @@ These individual programs can be used to extract general
 atmospheric variables from adp BUFR files into simple text 
 files.  
 
-To compile the BUFR libraries and extraction code, go to the 
-install directory. Execute the install.sh script to complete the compilations.
+To compile, execute the install.sh script in the 'install' directory.
 
 The executables will be placed in the exe directory.  Execute
 the desired executable and enter the BUFR input file name to extract
@@ -18,7 +16,7 @@ bufrtext.out will be created containing the text data.
 
 exe/bufr_sfc2ob.x:  used to convert gdas.adpsfc.tHHz.YYYYMMDD.bufr files to obs format.
 exe/bufr_ship2ob.x  used to convert gdas.sfcshp.tHHz.YYYYMMDD.bufr files  to obs format.
-exe/runob2lit_imd_obs.x  used to convert/combine obs format files into one littlr format file.
+exe/runob2lit_imd_obs.x  used to convert/combine obs format files into one little_r format file.
 exe/files.txt  edit to include desired obs files to be input into the runob2lit_imd_obs.x program.
                example files are currently listed in the files.txt file.
 
@@ -29,8 +27,8 @@ References:
 ================================================================================
 
 A guide to the BUFR libraries can be found at:
-http://www.nco.ncep.noaa.gov/sib/decoders/BUFRLIB/
+https://www.emc.ncep.noaa.gov/index.php?branch=BUFRLIB
 
 Definitions for BUFR MNEMONIC headers can be found in the doc directory
 or at:
-http://www.emc.ncep.noaa.gov/mmb/data_processing/bufrtab_tableb.htm 		
+https://www.emc.ncep.noaa.gov/BUFRLIB/tables/bufrtab_tableb.html	
