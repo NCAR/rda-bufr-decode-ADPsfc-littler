@@ -1,18 +1,14 @@
 #!/bin/sh
 #  ------------------------------------------------------------------------
-#  This script will make bufrupprair.x which to extract data from ADP BUFR
-#  input files, and place the data into a basic text file.  It is used to
-#  extract data from these kinds of files:
-#      gdas.adpupa.tHHz.YYYYMMDD.bufr 
-#      gdas.aircft.tHHz.YYYYMMDD.bufr
-#      gdas.satwnd.tHHz.YYYYMMDD.bufr 
-#      gdas.aircar.tHHz.YYYYMMDD.bufr
+#  This script will make the following executables:
 #
-#  dumpbufr.x:        used to dump all contents of a BUFR file.
-#  ** Make sure the "ar" command location has been set in your path
-#  environment variable.  Type "which ar" to check if this is done. **
+#  bufr_sfc2ob.x:  read ADP BUFR land surface station input files and
+#                  write output to text files
+#  bufr_ship2ob.x: read ADP BUFR ship observation input files and 
+#                  write output to text files
+#  dumpbufr.x:     used to dump all contents of a BUFR file.
 #  ------------------------------------------------------------------------
- 
+
 set -eua
  
 #  ------------------------------------------------------------------------
@@ -21,17 +17,13 @@ set -eua
  
 CPLAT=linux
 SRC=../src
-LIB=../lib
+LIB=/path/to/BUFRLIB
 EXE=../exe
 INSTALL=.
 
 #  different platforms use different link name protocols
 #  -----------------------------------------------------
 
-# if using linux, BUFR files must be run through the "grabbufr/grabbufr.sh" script
-# with the resulting output used as input for the decoders.  Set appropriate compiler
-# in grabbufr.sh, and exe/convert.csh
- 
 cflag=""
 fflag=""
 
@@ -43,27 +35,17 @@ then
    cflag=" -O3 -DUNDERSCORE -w"
 fi
 
-#  Compile and archive the Bufr Library
-#  ------------------------------------
-echo "Compiling BUFRLIB Library..."
-cd $LIB
-if [ -e bufrlib.a ]
-then
-  rm bufrlib.a
-fi
-$LIB/makebufrlib.sh
 cd $INSTALL
 
 #  Compile the decode programs
 #  ---------------------------------------
  
-echo "Compiling bufr_configdecode_ADPupa programs..."
+echo "Compiling bufr_decode_ADPsfc programs..."
 $FC $fflag -c $SRC/dumpbufr.f
 $FC $fflag -c $SRC/bufr_sfc2ob.f
 $FC $fflag -c $SRC/bufr_ship2ob.f
 
 $FC $fflag -c $SRC/runob2lit_imd_obs.f
-
  
 #  link and load the executables
 #  -----------------------------
