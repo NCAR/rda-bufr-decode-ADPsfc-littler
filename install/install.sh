@@ -2,11 +2,13 @@
 #  ------------------------------------------------------------------------
 #  This script will make the following executables:
 #
-#  bufr_sfc2ob.x:  read ADPSFC BUFR input files and
-#                  write output to formatted ASCII files
-#  bufr_ship2ob.x: read SFCSHIP BUFR input files and 
-#                  write output to formatted ASCII files
-#  dumpbufr.x:     used to dump all contents of a BUFR file.
+#  bufr_sfc2ob.x:       read ADPSFC BUFR input files and
+#                       write output to formatted ASCII files
+#  bufr_ship2ob.x:      read SFCSHIP BUFR input files and 
+#                       write output to formatted ASCII files
+#  dumpbufr.x:          used to dump all contents of a BUFR file.
+#  runob2lit_imd_obs.x: combine and convert obs formatted files into 
+#                       a single file in little_r format
 #  ------------------------------------------------------------------------
 
 set -eua
