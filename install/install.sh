@@ -3,9 +3,9 @@
 #  This script will make the following executables:
 #
 #  bufr_sfc2ob.x:  read ADP BUFR land surface station input files and
-#                  write output to text files
+#                  write output to formatted ASCII files
 #  bufr_ship2ob.x: read ADP BUFR ship observation input files and 
-#                  write output to text files
+#                  write output to formatted ASCII files
 #  dumpbufr.x:     used to dump all contents of a BUFR file.
 #  ------------------------------------------------------------------------
 
