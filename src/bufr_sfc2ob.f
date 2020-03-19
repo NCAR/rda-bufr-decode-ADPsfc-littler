@@ -9,7 +9,7 @@
 
       parameter(iu=9,iou=10)
 
-      dimension pr,tt,td,dslp
+      real pr,tt,td,dslp
       integer  xht,nlev,iargc,n,minu,k
       real  xpr,xu,xv
       real  temp,v,zx,d
@@ -116,7 +116,7 @@ c            write(*,*)' idate: ',idate,'  ',csubset
          IF (ierr .eq. -1) THEN
             write(*,*) '[bufr_sfc2ob] all records read, Exit'
             CALL CLOSBF (11)
-            GOTO 1000
+            GOTO 2000
          END IF
 
 C*             At this point, we have a data subset within the
