@@ -38,6 +38,7 @@
       character*13 time_tag
       character*40 fn,stndesc,codestr
       data iunit,iounit1,iounit2/114,150,151/
+      parameter (maxob=9999999)
 
       n = iargc()
 
@@ -75,7 +76,7 @@ c*      read(*,fmt='(a13)')time_tag
 !  reading a file in the list
 
 
-      do 444 iter =1,99999
+      do 444 iter=1,maxob
 
       call miss(kx,p,z,t,td,spd,dir,slp,ter,dname,staid)
       call getdat(iu,isurf,nlev,p,z,t,td,spd,dir,slp,ter,
