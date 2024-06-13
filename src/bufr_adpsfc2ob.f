@@ -17,7 +17,7 @@ c  BUFR mnemonics
       DATA locstrh/'CLAT CLON CLATH CLONH                   '/
       DATA locstrv/'SELV PRES PMSL                          '/
       DATA obstr  /'WDIR WSPD TMDB TMDP                     '/
-      DATA obstrh /'REHU TP03 TP24 HOCB CLTP                '/
+!      DATA obstrh /'REHU TP03 TP24 HOCB CLTP                '/
 
       parameter(iu=9, iou=10, lunit=11)
       parameter(nz=999999)
@@ -145,7 +145,7 @@ C* Read data values into arrays
         CALL UFBINT(lunit, locarrh, MXMN, MXLV, nlev, locstrh)
         CALL UFBINT(lunit, locarrv, MXMN, MXLV, nlev, locstrv)
         CALL UFBINT(lunit, obsarr, MXMN, MXLV, nlev, obstr)
-        CALL UFBINT(lunit, obsarrh, MXMN, MXLV, nlev, obstrh)
+!        CALL UFBINT(lunit, obsarrh, MXMN, MXLV, nlev, obstrh)
 
         if (ibfms(locarrt(5,1)) .eq. 1) then
            mins='00'
