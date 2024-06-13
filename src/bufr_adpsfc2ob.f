@@ -23,7 +23,8 @@ c  BUFR mnemonics
       parameter(nz=999999)
       parameter(dumm=99999.9)
 
-      real wmob, wmos, rpid, smid, stsn, sstn, lstn
+      real wmob, wmos
+      character rpid, smid, stsn, sstn, lstn
       real selv, pres, pmsl
       real wspd, wdir, tmdb, tmdp
       real lat, lon
