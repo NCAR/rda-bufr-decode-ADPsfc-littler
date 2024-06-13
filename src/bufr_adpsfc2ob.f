@@ -162,11 +162,11 @@ C*-----------------------------------------------------------------------
 c  Prepare output
         CALL get_val(idarr(1,1), wmob)
         CALL get_val(idarr(2,1), wmos)
-        CALL get_val(idarr(3,1), rpid)
-        CALL get_val(idarr(4,1), smid)
-        CALL get_val(idarr(5,1), stsn)
-        CALL get_val(idarr(6,1), sstn)
-        CALL get_val(idarr(7,1), lstn)
+        CALL get_charval(idarr(3,1), rpid)
+        CALL get_charval(idarr(4,1), smid)
+        CALL get_charval(idarr(5,1), stsn)
+        CALL get_charval(idarr(6,1), sstn)
+        CALL get_charval(idarr(7,1), lstn)
 
         CALL get_val(locarrv(1,1), selv)
         CALL get_val(locarrv(2,1), pres)
@@ -184,12 +184,12 @@ c  Prepare output
         if(pmsl .ne. 0 .and. pmsl .ne. dumm) then
             pmsl=pmsl/100.
         endif
-  
-        if((rpid .ne. dumm) .and. (stsn .ne. dumm)) then
+
+        if((rpid .ne. 'MISSING') .and. (stsn .ne. 'MISSING')) then
             write(adpsfcid, '(A,1X,A,1X,A)') 'RPID:',rpid,stsn
-        else if (rpid .ne. dumm) then
+        else if (rpid .ne. 'MISSING') then
             write(adpsfcid, '(A,1X,A)') 'RPID:',rpid
-        else if (stsn .ne. dumm) then
+        else if (stsn .ne. 'MISSING') then
             write(adpsfcid, '(A,1X,A)') 'Station name: ',stsn
         else
             write(adpsfcid, '(A40)') 'RPID: MISSING'
@@ -244,6 +244,28 @@ c         retval: observation value
           retval = mval
        ELSE
           retval = missing
+       ENDIF
+       
+       RETURN
+       END
+C*-----------------------------------------------------------------------
+       SUBROUTINE get_charval(mval, retval)
+
+C      Checks character value returned by UFBINT and returns either the 
+c      string value or missing.
+c
+c      Input:
+c         mval: BUFR character value returned by UFBINT
+c      Output:
+c         retval: observation string
+
+       real*8 mval
+       character retval
+
+       IF (ibfms(mval) .EQ. 0) THEN
+          write(retval, '(A)') mval
+       ELSE
+          write(retval, '(A)') 'MISSING'
        ENDIF
        
        RETURN
