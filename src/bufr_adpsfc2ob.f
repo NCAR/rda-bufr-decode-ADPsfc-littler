@@ -147,7 +147,7 @@ C* Read data values into arrays
         CALL UFBINT(lunit, obsarr, MXMN, MXLV, nlev, obstr)
         CALL UFBINT(lunit, obsarrh, MXMN, MXLV, nlev, obstrh)
 
-        if (ibfms(nlocarr(5,1)) .eq. 1) then
+        if (ibfms(locarrt(5,1)) .eq. 1) then
            mins='00'
         else
            write (mins, FMT='(I2)') int(locarrt(5,1))
