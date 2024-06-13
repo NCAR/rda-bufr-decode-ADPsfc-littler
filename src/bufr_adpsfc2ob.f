@@ -24,7 +24,7 @@ c  BUFR mnemonics
       parameter(dumm=99999.9)
 
       real wmob, wmos
-      character*80 rpid, smid, stsn, sstn, lstn
+      character*40 rpid, smid, stsn, sstn, lstn
       real selv, pres, pmsl
       real wspd, wdir, tmdb, tmdp
       real lat, lon
@@ -261,7 +261,7 @@ c      Output:
 c         retval: observation string
 
        real*8 mval
-       character*80 retval
+       character*40 retval
 
        IF (ibfms(mval) .EQ. 0) THEN
           write(retval, '(A)') mval
