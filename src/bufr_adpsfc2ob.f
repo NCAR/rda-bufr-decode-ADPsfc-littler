@@ -92,14 +92,12 @@ C*    Open output file
       ibogus = 0
       date='MMMMMMMMMM'
       mins='MM'
-      staid='MMMMMM'
       dname=' SYNOP'
       lat=dumm
       lon=dumm
       selv=dumm
       pmsl=dumm
       pres=dumm
-      zx=dumm
       tmdb=dumm
       tmdp=dumm
       wdir=dumm
