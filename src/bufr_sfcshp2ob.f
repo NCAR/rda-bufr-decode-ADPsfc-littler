@@ -41,8 +41,10 @@ c  BUFR mnemonics
       character*2 mins
 
       INTEGER lun, il, im
-      CHARACTER*80 desc
       CHARACTER*40 sfcshpname, sfcshpid, sfcshpsource
+
+      integer iogce, mtyp, msbt, lcmmsbt, iermsbt
+      character*80 cmmsbt
 
 C*-----------------------------------------------------------------------
 c*    Read the command-line arguments
@@ -114,17 +116,42 @@ c  Include code and flag table information from master BUFR tables
 
 C*-----------------------------------------------------------------------
 c  Loop through BUFR subsets
-        DO WHILE  ( .true. )
+      DO WHILE(.true.)
 
-c       Get file ID (lun) associated with the BUFR file
+c  Get file ID (lun) associated with the BUFR file
         CALL status(lunit, lun, il, im)
 
+c  Read next subset
         call readns(lunit, csubset, idate, ierr)
+
+        IF(ierr .eq. -1) THEN
+          write(*,*) '....all records read, Exit'
+          CALL CLOSBF(lunit)
+          GOTO 2000
+        END IF
+
+c Get current message and data subset number
         call ufbcnt(lunit, irec, isub)
 
 c        print'(''MESSAGE: '',A8,2(2X,I6),i12 )',
 c     +           csubset,irec,isub,idate
 
+        write(date, '(I10)') idate
+
+c Get data local subtype 
+        iogce = iupvs01(lunit, 'OGCE')
+        mtyp = iupvs01(lunit, 'MTYP')
+        msbt = iupvs01(lunit, 'MSBT')
+        call getcfmng(lunit, 'TABLASL', msbt, 'TABLAT', mtyp, 
+     +                cmmsbt, lcmmsbt, iermsbt)
+
+        if (iermsbt .eq. 0) then
+           write(sfcshpname, '(A40)') cmmsbt
+        else
+           write (sfcshpname, '(A,A8)') 'BUFR MESSAGE TYPE ', csubset
+        end if
+
+c Check message type and set obs type accordingly
         if ((csubset .eq. 'NC001001') .or.
      +      (csubset .eq. 'NC001003') .or.
      +      (csubset .eq. 'NC001013') .or.
@@ -134,14 +161,6 @@ c     +           csubset,irec,isub,idate
         else
             dname='  BUOY'
         endif
-
-        write(date, '(I10)') idate
-
-        IF(ierr .eq. -1) THEN
-          write(*,*) '....all records read, Exit'
-          CALL CLOSBF(lunit)
-          GOTO 2000
-        END IF
 
 C* Read data values into arrays
         CALL UFBINT(lunit, idarr, MXMN, MXLV, nlev, idstr)
@@ -155,11 +174,6 @@ C* Read data values into arrays
         else
            write (mins, FMT='(I2.2)') int(locarrt(5,1))
         endif
-
-c  Get Table D index for csubset mnemonic, and get the description
-        CALL nemtab(lun, csubset, idn, tab, n)
-        desc=tabd(n, lun)(16:70)
-        write(sfcshpname, '(A40)') desc(14:)
 
 C*-----------------------------------------------------------------------
 c  Prepare output
