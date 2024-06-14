@@ -35,10 +35,10 @@
       character*30 fin(20),fout1,fout2
       character*6 dname
       character*40 staid, staname
-      character   argv*200, mdate*12
+      character argv*200, mdate*12
       character*13 time_tag
       character*40 fn,codestr,source
-      data iunit,iounit1,iounit2/114,150,151/
+      data iunit,iounit1/114,150/
       parameter (maxob=9999999)
 
       n = iargc()
@@ -99,9 +99,7 @@ c Set desired area
 333   continue
   
       close(iounit1)
-      close(iounit2)
 
-20    stop 99999
       end
 
 c-----7---------------------------------------------------------------72
