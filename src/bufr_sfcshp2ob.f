@@ -46,6 +46,8 @@ c  BUFR mnemonics
       integer iogce, mtyp, msbt, lcmmsbt, iermsbt
       character*80 cmmsbt
 
+      integer len
+
 C*-----------------------------------------------------------------------
 c*    Read the command-line arguments
 c*      
@@ -147,7 +149,8 @@ c Get data local subtype
 
         if (iermsbt .eq. 0) then
            if (lcmmsbt .le. 40) then
-              write(sfcshpname, '(A)') cmmsbt//repeat(' ',40-lcmmsbt)
+              len=40-lcmmsbt
+              write(sfcshpname, '(A)') cmmsbt//repeat(' ',len)
            else
               write(sfcshpname, '(A40)') cmmsbt
            endif
