@@ -151,7 +151,7 @@ C* Read data values into arrays
         if (ibfms(locarrt(5,1)) .eq. 1) then
            mins='00'
         else
-           write (mins, FMT='(I2)') int(locarrt(5,1))
+           write (mins, FMT='(I2.2)') int(locarrt(5,1))
         endif
 
 c  Get Table D index for csubset mnemonic, and get the description
