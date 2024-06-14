@@ -40,7 +40,6 @@ c  BUFR mnemonics
       character*2 mins
 
       INTEGER lun, il, im
-      CHARACTER*80 desc
       CHARACTER*40 adpsfcname, adpsfcid, adpsfcsource
 
       integer iogce, mtyp, msbt, lcmmsbt, iermsbt
