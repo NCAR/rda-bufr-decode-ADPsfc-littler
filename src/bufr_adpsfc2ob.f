@@ -45,6 +45,9 @@ c  BUFR mnemonics
       CHARACTER*80 desc
       CHARACTER*40 adpsfcname, adpsfcid, adpsfcsource
 
+      integer iogce, mtyp, msbt, lcmmsbt, iermsbt
+      character*80 cmmsbt
+
 C*-----------------------------------------------------------------------
 c*    Read the command-line arguments
 c*      
@@ -127,6 +130,17 @@ c       Get file ID (lun) associated with the BUFR file
 c        print'(''MESSAGE: '',A8,2(2X,I6),i12 )',
 c     +           csubset,irec,isub,idate
 
+        iogce = iupvs01(lunit, 'OGCE')
+        mtyp = iupvs01(lunit, 'MTYP')
+        msbt = iupvs01(lunit, 'MSBT')
+        call getcfmng(lunit, 'TABLASL', msbt, 'TABLAT', mtyp, cmmsbt, lcmmsbt, iermsbt)
+
+        if ((iermsbt .eq. 0) .and. (iogce .eq. 7)) then
+           write (*, fmt= '(A, I4, A)') 'Local subcategory: ', msbt, cmmsbt(1:lcmmsbt)
+        else
+           write (*, fmt='(A, I4)') 'Local subcategory: ', msbt
+        end if
+
         if(csubset .eq. 'NC000007') then
             dname=' METAR'
         endif
@@ -158,6 +172,7 @@ c  Get Table D index for csubset mnemonic, and get the description
         CALL nemtab(lun, csubset, idn, tab, n)
         desc=tabd(n, lun)(16:70)
         write(adpsfcname, '(A40)') desc(14:)
+
 
 C*-----------------------------------------------------------------------
 c  Prepare output
