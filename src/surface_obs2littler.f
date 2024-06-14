@@ -221,35 +221,35 @@ c-----7---------------------------------------------------------------72
       if (isurf .eq. 1 ) then
 
       if (dname .eq. '  SHIP' ) then
-        codestr = 'FM-13 SHIP'
+        write(codestr, '(A40)') 'FM-13 SHIP'
       elseif(dname .eq. '  BUOY') then
-        codestr = 'FM-18 BUOY' 
+        write(codestr, '(A40)') 'FM-18 BUOY' 
       elseif(dname .eq. ' QSCAT') then 
-        codestr = 'FM-281 QSCAT'
+        write(codestr, '(A40)') 'FM-281 QSCAT'
       elseif(dname .eq. ' METAR' .or. dname .eq. 'SPECI ') then
-        codestr = 'FM-16 METAR' 
+        write(codestr, '(A40)') 'FM-16 METAR' 
       elseif(dname .eq. '  SSMI') then
-        codestr = 'FM-125 SSMI'
+        write(codestr, '(A40)') 'FM-125 SSMI'
       else
-        codestr = 'FM-12 SYNOP'
+        write(codestr, '(A40)') 'FM-12 SYNOP'
       endif 
 
       else
 
       if(dname .eq. 'PILOT ' ) then
-        codestr = 'FM-32 PILOT'
+        write(codestr, '(A40)') 'FM-32 PILOT'
       elseif(dname .eq. ' AMDAR' ) then
-        codestr = 'FM-42 AMDAR'
+        write(codestr, '(A40)') 'FM-42 AMDAR'
       elseif(dname .eq. ' AIREP' ) then
-        codestr = 'FM-96 AIREP'
+        write(codestr, '(A40)') 'FM-96 AIREP'
       elseif(dname .eq. ' SATOB' ) then
-        codestr = 'FM-88 SATOB'
+        write(codestr, '(A40)') 'FM-88 SATOB'
       elseif(dname .eq. ' SATEM' ) then
-        codestr = 'FM-86 SATEM'
+        write(codestr, '(A40)') 'FM-86 SATEM'
       elseif(dname .eq. '  TOVS' ) then
-        codestr = 'FM-131 TOVS'
+        write(codestr, '(A40)') 'FM-131 TOVS'
       else
-        codestr ='FM-35 TEMP'
+        write(codestr, '(A40)') 'FM-35 TEMP'
       endif
 
       endif
