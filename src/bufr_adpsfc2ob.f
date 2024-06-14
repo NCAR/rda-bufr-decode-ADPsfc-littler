@@ -157,7 +157,7 @@ C* Read data values into arrays
 c  Get Table D index for csubset mnemonic, and get the description
         CALL nemtab(lun, csubset, idn, tab, n)
         desc=tabd(n, lun)(16:70)
-        write(adpsfcname, '(A40)') desc(15:)
+        write(adpsfcname, '(A40)') desc(14:)
 
 C*-----------------------------------------------------------------------
 c  Prepare output
@@ -187,11 +187,12 @@ c  Prepare output
         endif
 
         if((rpid .ne. 'MISSING') .and. (stsn .ne. 'MISSING')) then
-            write(adpsfcid, '(A,1X,A,1X,A)') 'RPID:',rpid,stsn
+            write(adpsfcid, '(A,1X,A,1X,A)') 
+     +            'RPID:',trim(rpid),trim(stsn)
         else if (rpid .ne. 'MISSING') then
-            write(adpsfcid, '(A,1X,A)') 'RPID:',rpid
+            write(adpsfcid, '(A,1X,A)') 'RPID:',trim(rpid)
         else if (stsn .ne. 'MISSING') then
-            write(adpsfcid, '(A,1X,A)') 'Station name: ',stsn
+            write(adpsfcid, '(A,1X,A)') 'Station name: ',trim(stsn)
         else
             write(adpsfcid, '(A40)') 'RPID: MISSING'
         endif
