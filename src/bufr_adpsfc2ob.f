@@ -1,5 +1,3 @@
-      use moda_tababd
-
       PARAMETER (MXMN = 10)
       PARAMETER (MXLV = 255)
 
@@ -121,39 +119,43 @@ C*-----------------------------------------------------------------------
 c  Loop through BUFR subsets
       DO WHILE(.true.)
 
-c       Get file ID (lun) associated with the BUFR file
+c  Get file ID (lun) associated with the BUFR file
         CALL status(lunit, lun, il, im)
 
+c  Read next subset
         call readns(lunit, csubset, idate, ierr)
-        call ufbcnt(lunit, irec, isub)
-
-c        print'(''MESSAGE: '',A8,2(2X,I6),i12 )',
-c     +           csubset,irec,isub,idate
-
-        iogce = iupvs01(lunit, 'OGCE')
-        mtyp = iupvs01(lunit, 'MTYP')
-        msbt = iupvs01(lunit, 'MSBT')
-        call getcfmng(lunit, 'TABLASL', msbt, 'TABLAT', mtyp, 
-     +                cmmsbt, lcmmsbt, iermsbt)
-
-        if ((iermsbt .eq. 0) .and. (iogce .eq. 7)) then
-           write (*, fmt= '(A, I4, A)') 'Local subcategory: ', 
-     +            msbt, cmmsbt(1:lcmmsbt)
-        else
-           write (*, fmt='(A, I4)') 'Local subcategory: ', msbt
-        end if
-
-        if(csubset .eq. 'NC000007') then
-            dname=' METAR'
-        endif
-
-        write(date, '(I10)') idate
 
         IF(ierr .eq. -1) THEN
           write(*,*) '....all records read, Exit'
           CALL CLOSBF(lunit)
           GOTO 2000
         END IF
+
+c Get current message and data subset number
+        call ufbcnt(lunit, irec, isub)
+
+c        print'(''MESSAGE: '',A8,2(2X,I6),i12 )',
+c     +           csubset,irec,isub,idate
+
+        write(date, '(I10)') idate
+
+c Get data local subtype 
+        iogce = iupvs01(lunit, 'OGCE')
+        mtyp = iupvs01(lunit, 'MTYP')
+        msbt = iupvs01(lunit, 'MSBT')
+        call getcfmng(lunit, 'TABLASL', msbt, 'TABLAT', mtyp, 
+     +                cmmsbt, lcmmsbt, iermsbt)
+
+        if (iermsbt .eq. 0) then
+           write(adpsfcname, '(A40)') cmmsbt
+        else
+           write (adpsfcname, '(A,A8)') 'BUFR MESSAGE TYPE ', csubset
+        end if
+
+c Check message type and set obs type accordingly
+        if(csubset .eq. 'NC000007') then
+            dname=' METAR'
+        endif
 
 C* Read data values into arrays
 
@@ -169,12 +171,6 @@ C* Read data values into arrays
         else
            write (mins, FMT='(I2.2)') int(locarrt(5,1))
         endif
-
-c  Get Table D index for csubset mnemonic, and get the description
-        CALL nemtab(lun, csubset, idn, tab, n)
-        desc=tabd(n, lun)(16:70)
-        write(adpsfcname, '(A40)') desc(14:)
-
 
 C*-----------------------------------------------------------------------
 c  Prepare output
