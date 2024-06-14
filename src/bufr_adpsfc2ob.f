@@ -133,10 +133,12 @@ c     +           csubset,irec,isub,idate
         iogce = iupvs01(lunit, 'OGCE')
         mtyp = iupvs01(lunit, 'MTYP')
         msbt = iupvs01(lunit, 'MSBT')
-        call getcfmng(lunit, 'TABLASL', msbt, 'TABLAT', mtyp, cmmsbt, lcmmsbt, iermsbt)
+        call getcfmng(lunit, 'TABLASL', msbt, 'TABLAT', mtyp, 
+     +                cmmsbt, lcmmsbt, iermsbt)
 
         if ((iermsbt .eq. 0) .and. (iogce .eq. 7)) then
-           write (*, fmt= '(A, I4, A)') 'Local subcategory: ', msbt, cmmsbt(1:lcmmsbt)
+           write (*, fmt= '(A, I4, A)') 'Local subcategory: ', 
+     +            msbt, cmmsbt(1:lcmmsbt)
         else
            write (*, fmt='(A, I4)') 'Local subcategory: ', msbt
         end if
