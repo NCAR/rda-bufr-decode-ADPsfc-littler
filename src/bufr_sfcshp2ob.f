@@ -139,7 +139,7 @@ c     +           csubset,irec,isub,idate
         write(date, '(I10)') idate
 
 c Get data local subtype
-        sfcshpname = repeat(' ', 40)
+        (sfcshpname(i)=' ', i=1,40)
         iogce = iupvs01(lunit, 'OGCE')
         mtyp = iupvs01(lunit, 'MTYP')
         msbt = iupvs01(lunit, 'MSBT')
