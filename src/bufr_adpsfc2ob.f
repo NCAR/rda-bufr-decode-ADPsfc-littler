@@ -201,6 +201,7 @@ c  Prepare output
             pmsl=pmsl/100.
         endif
 
+        write(adpsfcid, '(A40)') repeat(' ', 40)
         if((rpid .ne. 'MISSING') .and. (stsn .ne. 'MISSING')) then
             write(adpsfcid, '(A,1X,A,1X,A)') 
      +            'RPID:',trim(rpid),trim(stsn)
