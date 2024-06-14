@@ -89,7 +89,7 @@ C*    Open output file
       open(iou,file=fout, status='unknown', form='formatted')
       write(iou, fmt='(a10)') date_tag
 
-      sfcshpsource='NCEP GDAS BUFR SFCSHP observations      '
+      write(sfcshpsource, '(A40)') 'NCEP GDAS BUFR SFCSHP observations'
 
       nlev = 1
       isurf = 1
@@ -150,9 +150,9 @@ c Get data local subtype
      +                cmmsbt, lcmmsbt, iermsbt)
 
         if (iermsbt .eq. 0) then
-              write(sfcshpname, '(A40)') cmmsbt
+              write(sfcshpname, '(A40)') cmmsbt(1:lcmmsbt)
         else
-           write (sfcshpname, '(A,A8)') 'BUFR MESSAGE TYPE ', csubset
+           write (sfcshpname, '(A40)') 'BUFR MESSAGE TYPE '//csubset
         end if
 
 c Check message type and set obs type accordingly
@@ -174,9 +174,9 @@ C* Read data values into arrays
         CALL UFBINT(lunit, obsarr, MXMN, MXLV, nlev, obstr)
 
         if (ibfms(locarrt(5,1)) .eq. 1) then
-           mins='00'
+           write(mins, '(I2.2)') '00'
         else
-           write (mins, FMT='(I2.2)') int(locarrt(5,1))
+           write(mins, '(I2.2)') int(locarrt(5,1))
         endif
 
 C*-----------------------------------------------------------------------
@@ -209,12 +209,12 @@ c  Prepare output
 
         write(sfcshpid, '(A40)') repeat(' ', 40)
         if((rpid .ne. 'MISSING') .and. (stsn .ne. 'MISSING')) then
-            write(sfcshpid, '(A,1X,A,1X,A)') 
-     +            'RPID:',trim(rpid),trim(stsn)
+            write(sfcshpid, '(A40)') 
+     +            'RPID: '//trim(rpid)//' '//trim(stsn)
         else if (rpid .ne. 'MISSING') then
-            write(sfcshpid, '(A,1X,A)') 'RPID:',trim(rpid)
+            write(sfcshpid, '(A40)') 'RPID: '//trim(rpid)
         else if (stsn .ne. 'MISSING') then
-            write(sfcshpid, '(A,1X,A)') 'Ship/buoy: ',trim(stsn)
+            write(sfcshpid, '(A40)') 'Ship/buoy: '//trim(stsn)
         else
             write(sfcshpid, '(A40)') 'RPID: MISSING'
         endif

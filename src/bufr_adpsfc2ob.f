@@ -86,7 +86,7 @@ C*    Open output file
       open(iou,file=fout, status='unknown', form='formatted')
       write(iou, fmt='(a10)') date_tag
 
-      adpsfcsource='NCEP GDAS BUFR ADPSFC observations      '
+      write(adpsfcsource, '(A40)') 'NCEP GDAS BUFR ADPSFC observations'
 
       nlev = 1
       isurf = 1
@@ -147,16 +147,16 @@ c Get data local subtype
      +                cmmsbt, lcmmsbt, iermsbt)
 
         if (iermsbt .eq. 0) then
-           write(adpsfcname, '(A40)') cmmsbt
+           write(adpsfcname, '(A40)') cmmsbt(1:lcmmsbt)
         else
-           write (adpsfcname, '(A,A8)') 'BUFR MESSAGE TYPE ', csubset
+           write (adpsfcname, '(A40)') 'BUFR MESSAGE TYPE '//csubset
         end if
 
 c Check message type and set obs type accordingly
         if(csubset .eq. 'NC000007') then
-            dname=' METAR'
+            write(dname, '(A6)') 'METAR'
         else
-            dname=' SYNOP'
+            write(dname, '(A6)') 'SYNOP'
         endif
 
 C* Read data values into arrays
@@ -169,7 +169,7 @@ C* Read data values into arrays
 !        CALL UFBINT(lunit, obsarrh, MXMN, MXLV, nlev, obstrh)
 
         if (ibfms(locarrt(5,1)) .eq. 1) then
-           mins='00'
+           write(mins, '(I2.2)') '00'
         else
            write (mins, FMT='(I2.2)') int(locarrt(5,1))
         endif
@@ -203,12 +203,12 @@ c  Prepare output
 
         write(adpsfcid, '(A40)') repeat(' ', 40)
         if((rpid .ne. 'MISSING') .and. (stsn .ne. 'MISSING')) then
-            write(adpsfcid, '(A,1X,A,1X,A)') 
-     +            'RPID:',trim(rpid),trim(stsn)
+            write(adpsfcid, '(A40)') 
+     +            'RPID: '//trim(rpid)//' '//trim(stsn)
         else if (rpid .ne. 'MISSING') then
-            write(adpsfcid, '(A,1X,A)') 'RPID:',trim(rpid)
+            write(adpsfcid, '(A40)') 'RPID: '//trim(rpid)
         else if (stsn .ne. 'MISSING') then
-            write(adpsfcid, '(A,1X,A)') 'Station name: ',trim(stsn)
+            write(adpsfcid, '(A40)') 'Station name: '//trim(stsn)
         else
             write(adpsfcid, '(A40)') 'RPID: MISSING'
         endif
