@@ -150,6 +150,7 @@ c Get data local subtype
               write(sfcshpname, '(A)') cmmsbt//repeat(' ',40-lcmmsbt)
            else
               write(sfcshpname, '(A40)') cmmsbt
+           endif
         else
            write (sfcshpname, '(A,A8)') 'BUFR MESSAGE TYPE ', csubset
         end if
