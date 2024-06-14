@@ -141,6 +141,8 @@ c     +           csubset,irec,isub,idate
         write(date, '(I10)') idate
 
 c Get data local subtype
+        write(cmmsbt, '(A40)') repeat(' ', 40)
+        write(sfcshpname, '(A40)') repeat(' ', 40)
         iogce = iupvs01(lunit, 'OGCE')
         mtyp = iupvs01(lunit, 'MTYP')
         msbt = iupvs01(lunit, 'MSBT')
@@ -148,12 +150,7 @@ c Get data local subtype
      +                cmmsbt, lcmmsbt, iermsbt)
 
         if (iermsbt .eq. 0) then
-           if (lcmmsbt .le. 40) then
-              len=40-lcmmsbt
-              write(sfcshpname, '(A)') cmmsbt//repeat(' ',len)
-           else
               write(sfcshpname, '(A40)') cmmsbt
-           endif
         else
            write (sfcshpname, '(A,A8)') 'BUFR MESSAGE TYPE ', csubset
         end if
