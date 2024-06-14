@@ -93,7 +93,6 @@ C*    Open output file
       ibogus = 0
       date='MMMMMMMMMM'
       mins='MM'
-      dname=' SYNOP'
       lat=dumm
       lon=dumm
       selv=dumm
@@ -154,6 +153,8 @@ c Get data local subtype
 c Check message type and set obs type accordingly
         if(csubset .eq. 'NC000007') then
             dname=' METAR'
+        else
+            dname=' SYNOP'
         endif
 
 C* Read data values into arrays
