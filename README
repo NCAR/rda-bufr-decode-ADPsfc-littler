@@ -1,10 +1,10 @@
 ds461.0 (NCEP ADP Global Surface Observations, daily Oct1999-continuing)
 
-Description and instructions to use the included extraction program:
+Description and instructions to use the included programs:
 =================================================================================
 
 These individual programs can be used to extract general 
-atmospheric variables from adp BUFR files into simple text 
+atmospheric variables from ADP BUFR files into simple text 
 files.  
 
 To compile, execute the install.sh script in the 'install' directory.
@@ -14,10 +14,10 @@ the desired executable and enter the BUFR input file name to extract
 the basic meteorological varibles into text format.  A file named
 bufrtext.out will be created containing the text data.
 
-exe/bufr_sfc2ob.x:  used to convert gdas.adpsfc.tHHz.YYYYMMDD.bufr files to obs format.
-exe/bufr_ship2ob.x  used to convert gdas.sfcshp.tHHz.YYYYMMDD.bufr files  to obs format.
-exe/runob2lit_imd_obs.x  used to convert/combine obs format files into one little_r format file.
-exe/files.txt  edit to include desired obs files to be input into the runob2lit_imd_obs.x program.
+exe/bufr_adpsfc2ob.x:  used to convert gdas.adpsfc.tHHz.YYYYMMDD.bufr files to obs format.
+exe/bufr_sfcshp2ob.x  used to convert gdas.sfcshp.tHHz.YYYYMMDD.bufr files  to obs format.
+exe/surface_obs2littler.x  used to convert/combine obs format files into one little_r format file.
+exe/files.txt  edit to include desired obs files to be input into the surface_obs2littler.x program.
                example files are currently listed in the files.txt file.
 
 ** To convert muliple files, place input BUFR data in "bufrdecodelr/bufrobs",
@@ -28,7 +28,7 @@ References:
 
 The latest release of the BUFR software library is required to compile and use
 this code.  Software download and user guide to the BUFR libraries can be found at:
-https://www.emc.ncep.noaa.gov/index.php?branch=BUFRLIB
+https://emc.ncep.noaa.gov/emc/pages/infrastructure/bufrlib.php
 
-Definitions for BUFR MNEMONIC headers can be found at:
-https://www.emc.ncep.noaa.gov/BUFRLIB/tables/bufrtab_tableb.html	
+Definitions for BUFR Table B mnemonics can be found at:
+https://www.emc.ncep.noaa.gov/emc/pages/infrastructure/bufrlib/tables/bufrtab_tableb.html	
