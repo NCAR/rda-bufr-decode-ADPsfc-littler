@@ -2,7 +2,6 @@
 
 # Script to process all BUFR tar files located in "bufrdecodelr/bufrobs"
 
-
 # !! Edit procdir directory to reflect your local system !!
 
 set procdir=`pwd`/..
@@ -31,19 +30,19 @@ foreach dir (sfcobs.*????)
       echo $datehh
       echo $hour
     
-      echo "$procdir/exe/bufr_sfc2ob.x $procdir/bufrobs/sfcobs.$date/gdas.adpsfc.$hour.$date.bufr $datehh"
-      $procdir/exe/bufr_sfc2ob.x $procdir/bufrobs/sfcobs.$date/gdas.adpsfc.$hour.$date.bufr $datehh 
-      echo "$procdir/exe/bufr_ship2ob.x $procdir/bufrobs/sfcobs.$date/gdas.sfcshp.$hour.$date.bufr $datehh"
-      $procdir/exe/bufr_ship2ob.x $procdir/bufrobs/sfcobs.$date/gdas.sfcshp.$hour.$date.bufr $datehh   
+      echo "$procdir/exe/bufr_adpsfc2ob.x $procdir/bufrobs/sfcobs.$date/gdas.adpsfc.$hour.$date.bufr $datehh"
+      $procdir/exe/bufr_adpsfc2ob.x $procdir/bufrobs/sfcobs.$date/gdas.adpsfc.$hour.$date.bufr $datehh 
+      echo "$procdir/exe/bufr_sfcshp2ob.x $procdir/bufrobs/sfcobs.$date/gdas.sfcshp.$hour.$date.bufr $datehh"
+      $procdir/exe/bufr_sfcshp2ob.x $procdir/bufrobs/sfcobs.$date/gdas.sfcshp.$hour.$date.bufr $datehh   
 
-      echo Surface$datehh.obs >files.txt
-      echo Ship$datehh.obs >>files.txt 
+      echo adpsfc$datehh.obs >files.txt
+      echo sfcshp$datehh.obs >>files.txt 
     
-      echo "$procdir/exe/runob2lit_imd_obs.x files.txt $datehh"
-      $procdir/exe/runob2lit_imd_obs.x files.txt $datehh
+      echo "$procdir/exe/surface_obs2littler.x files.txt $datehh"
+      $procdir/exe/surface_obs2littler.x files.txt $datehh
     
-      rm Surface$datehh.obs
-      rm Ship$datehh.obs
+      rm adpsfc$datehh.obs
+      rm sfcshp$datehh.obs
     
       rm files.txt
     
