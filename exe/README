@@ -1,9 +1,9 @@
 To properly execute files:
 
-./bufr_sfc2ob.x gdas.adpsfc.tHHz.YYYYMMDD.bufr YYYYMMDDHH
-./bufr_ship2ob.x gdas.sfcshp.tHHz.YYYYMMDD.bufr YYYYMMDDHH
+./bufr_adpsfc2ob.x gdas.adpsfc.tHHz.YYYYMMDD.bufr YYYYMMDDHH
+./bufr_sfcshp2ob.x gdas.sfcshp.tHHz.YYYYMMDD.bufr YYYYMMDDHH
 
-./runob2lit_imd_obs.x files.txt YYYYMMDDHH
+./surface_obs2littler.x files.txt YYYYMMDDHH
 
 To convert muliple files, place input BUFR data in bufrdecodeslr/bufrobs,
 and edit and run the convert.sh script accordingly. Output data will be placed
