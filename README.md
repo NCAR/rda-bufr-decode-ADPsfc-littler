@@ -19,11 +19,7 @@ the basic meteorological varibles into formatted text format.
 exe/bufr_adpsfc2ob.x:        used to convert gdas.adpsfc.tHHz.YYYYMMHH.bufr files to ASCII format.
 exe/bufr_sfcshp2ob.x:        used to convert gdas.sfcshp.tHHz.YYYYMMHH.bufr files to ASCII format.
 exe/surface_obs2littler.x:  used to convert/combine obs format files into one little_r format file.
-exe/files.txt  edit to include desired ASCII obs files to be input into the surface_obs2littler.x program.
-               example files are currently listed in the files.txt file. 
 ```
-To convert muliple files, place input BUFR data in `/bufrobs`,
-then edit and run the `exe/convert.csh` script accordingly.
 
 # References
 A guide to the NCEP BUFR libraries can be found at:
